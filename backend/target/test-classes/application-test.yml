@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+app:
+  jwt:
+    secret: test-only-secret-that-is-definitely-long-enough-for-hs256
+    issuer: reconciliation-engine-test
+    access-token-ttl: PT1H
+  storage:
+    root: ./target/test-settlement-files
+  matching:
+    date-window: PT72H
+    amount-tolerance-minor: 2
+    min-heuristic-confidence: 0.70
+  cors:
+    allowed-origins: http://localhost:5173
+  seed:
+    users: true
+    default-password: recon-demo-2026
+  stripe:
+    enabled: false
+    api-key: ""
+    connect-timeout: PT5S
+    read-timeout: PT20S
+
+logging:
+  level:
+    org.springframework.batch: WARN
+    org.hibernate.SQL: WARN

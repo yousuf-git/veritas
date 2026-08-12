@@ -1,0 +1,38 @@
+Everything is written and compiling. I'm blocked on the last step — verification.
+
+Please run this in the session (I can't sudo, and there's no podman fallback):
+
+! sudo systemctl start docker
+
+Then I'll run migrations, the full test suite, and the end-to-end demo, and report the real numbers.
+
+Status — code complete, nothing yet executed against a database:
+
+┌─────────────────────────────────────────────┬──────────────────────┐
+│                    Piece                    │        State         │
+├─────────────────────────────────────────────┼──────────────────────┤
+│ Backend (Boot 4.1, ~55 classes)             │ compiles clean       │
+├─────────────────────────────────────────────┼──────────────────────┤
+│ Flyway migrations (batch + domain schema)   │ written, never run   │
+├─────────────────────────────────────────────┼──────────────────────┤
+│ Test suite (3 unit + 3 integration classes) │ compiles, never run  │
+├─────────────────────────────────────────────┼──────────────────────┤
+│ Frontend (React 19.2 / Vite 8 / TS 7)       │ builds clean, 286 kB │
+├─────────────────────────────────────────────┼──────────────────────┤
+│ README                                      │ written              │
+└─────────────────────────────────────────────┴──────────────────────┘
+
+Version drift I hit and corrected against real artifacts rather than memory: Boot 4.1 stopped managing Testcontainers versions, Testcontainers 2.x renamed its modules (testcontainers-postgresql) and dropped the generic on PostgreSQLContainer, Batch 6 moved item APIs to org.springframework.batch.infrastructure.item, and Boot 4 defaults to Jackson 3.
+
+Design decisions worth flagging:
+
+- Fees are not swept as missing payouts. A fee never arrives as its own settlement row — it's deducted in the fee column of its charge's row, and is verified there against the booked FEE ledger entry. Sweeping them would report every ordinary fee as a discrepancy.
+- Stripe's CSV reports use major units (120.00) while its API uses minor units. Confirmed from Stripe's docs, not assumed. Conversion uses RoundingMode.UNNECESSARY, so sub-cent precision is a parse failure rather than a silently dropped fraction.
+- The live Stripe path renders back into the CSV format and re-enters through the same parser, so pulled data gets the same checksum idempotency and audit storage as an upload, and only one parser is trusted.
+- Match rate excludes payout/transfer rows (EXCLUDED) rather than counting them as failures.
+
+One thing I could not verify without a DB: whether Hibernate 7.4 maps Map<String,String> to jsonb cleanly given Boot 4 ships Jackson 3 while Hibernate's format mapper expects Jackson 2. Both are on the classpath, so it should resolve — but that's reasoning, not observation, and it's the first thing the integration tests will expose.
+
+✻ Worked for 44m 34s
+
+※ recap: Built the settlement reconciliation engine end to end — backend, tests, and React UI all compile, but nothing has run against a database yet. Next: you start Docker so I can run migrations, the test suite, and the demo. (disable recaps in /config)

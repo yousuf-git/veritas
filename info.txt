@@ -1,0 +1,24 @@
+## 1. Settlement Reconciliation Engine - Java Spring Boot
+
+**WHAT:** A service that ingests settlement reports from payment providers (Stripe/PayPal-style payout files) and reconciles them against the company's internal ledger of orders, refunds, and fees. It matches thousands of transactions per file, classifies mismatches (missing payout, amount drift, duplicate charge, unexpected fee, currency rounding), and produces an exception queue for a finance team to resolve — with every money movement traceable to its source record.
+
+**WHY it stands out:**
+- Reconciliation is a universal, unglamorous pain — every company that takes payments does this, usually badly in spreadsheets. Building it says "I understand back-office reality," not "I followed a tutorial."
+- It showcases the things Java is hired for: exact money arithmetic (no floats), idempotent batch processing (re-running a file must not double-book), immutable audit trails, and matching logic that degrades gracefully from exact match → fuzzy match → human review.
+- It has a measurable outcome you can put on the case study: "auto-matches X% of transactions, surfaces the rest with a classified reason" — a business metric, not a tech metric.
+
+**IMPLEMENTATION:**
+
+Core features / flows:
+1. **Ledger ingestion** — REST endpoints (or seed script) that record internal orders, refunds, and fees as immutable ledger entries. Money stored as minor units (long) + currency code, never floats/doubles.
+2. **Settlement file upload** — finance user uploads a provider payout file (CSV, modeled on Stripe's balance transaction report format). File is checksummed and registered; re-uploading the same file is a no-op (idempotency).
+3. **Matching pipeline** — batch job runs per file: exact match (provider reference ID) → heuristic match (amount + date window + metadata) → unmatched. Each stage records *why* it matched or didn't.
+4. **Discrepancy classification** — unmatched/partial items auto-classified: missing payout, amount drift, duplicate charge, unexpected fee, FX rounding.
+5. **Exception queue workflow** — finance user views exceptions, resolves with an action (accept fee, link manually, escalate), every resolution audit-logged with who/when/why.
+6. **Reconciliation report** — per-file summary: total matched %, money accounted for vs. outstanding, drill-down to any line.
+
+External dependencies:
+- **PostgreSQL** — ledger + reconciliation state (transactions, constraints doing real work).
+- **Stripe test mode (optional but strong)** — generate real charges/refunds in test mode and pull actual balance transaction reports via API, so the demo reconciles *real Stripe data*, not invented CSVs. Fallback: a file generator that produces realistic provider files with injected discrepancies.
+- **Spring Batch** (or plain scheduled jobs) for the matching pipeline; no message broker needed for v1.
+- Local object storage (filesystem or MinIO) for uploaded files.

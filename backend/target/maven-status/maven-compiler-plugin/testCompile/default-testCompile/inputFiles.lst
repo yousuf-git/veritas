@@ -1,0 +1,6 @@
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/AbstractIntegrationTest.java
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/common/MoneyTest.java
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/exceptionqueue/ExceptionQueueSecurityIT.java
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/provider/stripe/StripeCsvParserTest.java
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/recon/ReconciliationPipelineIT.java
+/home/harry/projects/reconciliation-engine-java/backend/src/test/java/com/reconengine/settlement/SettlementIngestIT.java
