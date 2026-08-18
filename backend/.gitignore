@@ -1,0 +1,15 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+*.class
+*.log
+.mvn/timing.properties
+
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+HELP.md
