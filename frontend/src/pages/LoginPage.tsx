@@ -26,7 +26,7 @@ export default function LoginPage() {
     <div className="login-shell">
       <form className="login-card" onSubmit={onSubmit}>
         <span className="brand-mark large">◧</span>
-        <h1>Settlement Reconciliation</h1>
+        <h1>Veritas</h1>
         <p className="muted">Sign in with your finance account.</p>
 
         <label htmlFor="username">Username</label>

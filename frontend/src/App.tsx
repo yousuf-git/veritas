@@ -18,7 +18,7 @@ export default function App() {
         <div className="brand">
           <span className="brand-mark">◧</span>
           <div>
-            <h1>Settlement Reconciliation</h1>
+            <h1>Veritas</h1>
             <p className="brand-sub">Provider payouts against the internal ledger</p>
           </div>
         </div>
