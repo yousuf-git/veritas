@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80" role="img" aria-label="Veritas">
+  <defs>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+  <circle cx="40" cy="40" r="30" fill="none" stroke="url(#mark)" stroke-width="5"/>
+  <path d="M25 41 L35 51 L57 27" fill="none" stroke="url(#mark)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="84" y="52" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="36" font-weight="800" letter-spacing="1.5" fill="#111827">VERITAS</text>
+</svg>

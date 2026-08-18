@@ -1,8 +1,12 @@
 <div align="center">
 
-  <h1>Settlement Reconciliation Engine</h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="veritas-logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="veritas-logo-light.svg">
+    <img src="veritas-logo-light.svg" alt="Veritas" width="280">
+  </picture>
 
-  <p><strong>Reconciles payment-provider payout files against an internal ledger, classifies every mismatch, and hands the remainder to a finance team as a worked exception queue.</strong></p>
+  <p><strong>Settlement reconciliation engine</strong> — reconciles payment-provider payout files against an internal ledger, classifies every mismatch, and hands the remainder to a finance team as a worked exception queue.</p>
 
   ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
   ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square)
@@ -18,6 +22,10 @@
   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
   ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
   ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+  <br/><br/>
+
+  <img src="veritas-thumbnail.png" alt="Veritas dashboard overview" width="820">
 
 </div>
 
@@ -150,7 +158,7 @@ ledger entry. Sweeping fees in step 2 would report every ordinary fee as a discr
 ```
 .
 ├── backend/                       # Spring Boot service, standalone
-│   └── src/main/java/com/reconengine/
+│   └── src/main/java/com/veritas/
 │       ├── audit/                 # append-only trail: who did what, when, why
 │       ├── auth/                  # JWT issuance, login throttle, current actor
 │       ├── common/                # Money, typed errors, ProblemDetail handler
