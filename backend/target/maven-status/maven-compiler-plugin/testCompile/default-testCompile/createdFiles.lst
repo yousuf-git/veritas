@@ -1,6 +1,0 @@
-com/reconengine/exceptionqueue/ExceptionQueueSecurityIT.class
-com/reconengine/settlement/SettlementIngestIT.class
-com/reconengine/AbstractIntegrationTest.class
-com/reconengine/provider/stripe/StripeCsvParserTest.class
-com/reconengine/recon/ReconciliationPipelineIT.class
-com/reconengine/common/MoneyTest.class

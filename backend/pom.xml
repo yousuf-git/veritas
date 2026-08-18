@@ -11,11 +11,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.reconengine</groupId>
-    <artifactId>reconciliation-engine</artifactId>
+    <groupId>com.veritas</groupId>
+    <artifactId>veritas</artifactId>
     <version>1.0.0</version>
-    <name>settlement-reconciliation-engine</name>
-    <description>Settlement reconciliation engine for payment provider payout files</description>
+    <name>veritas</name>
+    <description>Veritas — settlement reconciliation engine for payment provider payout files</description>
 
     <properties>
         <java.version>21</java.version>
